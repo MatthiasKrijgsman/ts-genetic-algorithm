@@ -1,1 +1,6 @@
-console.log('Hello World');
+import Population, {ChromosomeDefinition} from "./genetic";
+
+let test: ChromosomeDefinition = [
+    { get: () => Math.random() }
+];
+
