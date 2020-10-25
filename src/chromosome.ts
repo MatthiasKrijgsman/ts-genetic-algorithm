@@ -6,10 +6,9 @@ export type Chromosome = Array<Gene>;
 export type GeneDefinition = () => Gene;
 export type ChromosomeDefinition = Array<GeneDefinition>;
 
-export const generateChromosome: (
+export function generateChromosome(
     definition: ChromosomeDefinition
-) => Chromosome
-    = (definition: ChromosomeDefinition) => {
+): Chromosome {
     let chromosome = Array<number>();
 
     for (let i = 0; i < definition.length; i++) {
@@ -19,12 +18,11 @@ export const generateChromosome: (
     return chromosome;
 };
 
-export const mutateChromosome: (
+export function mutateChromosome(
     chromosome: Chromosome,
     definition: ChromosomeDefinition,
     mutationRate: MutationRate
-) => Chromosome
-    = (chromosome: Chromosome, definition: ChromosomeDefinition, mutationRate: MutationRate) => {
+): Chromosome {
 
     for (let i = 0; i < chromosome.length; i++) {
 
@@ -36,11 +34,10 @@ export const mutateChromosome: (
     return chromosome;
 }
 
-export const crossoverChromosomes: (
+export function crossoverChromosomes(
     parent1: Chromosome,
     parent2: Chromosome
-) => [Chromosome, Chromosome]
-    = (parent1: Chromosome, parent2: Chromosome) => {
+): [Chromosome, Chromosome] {
 
     let child1: Chromosome = [];
     let child2: Chromosome = [];
