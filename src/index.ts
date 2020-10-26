@@ -1,13 +1,16 @@
-import {ChromosomeDefinition, crossoverChromosomes, generateChromosome, mutateChromosome} from "./chromosome";
+import {ChromosomeDefinition} from "./chromosome";
 import {FitnessFunction, Member} from "./member";
-import Population from "./population";
+import Population, {OptimizationType} from "./population";
 import {randomInt} from "./utility";
 
 const chromeDef: ChromosomeDefinition = [
-    Math.random,
-    Math.random,
-    Math.random,
-    Math.random
+    () => randomInt(0, 100),
+    () => randomInt(0, 100),
+    () => randomInt(0, 100),
+    () => randomInt(0, 100),
+    () => randomInt(0, 100),
+    () => randomInt(0, 100),
+    () => randomInt(0, 100)
 ]
 const fitnessFunction: FitnessFunction = (member: Member) => {
 
@@ -21,13 +24,16 @@ const fitnessFunction: FitnessFunction = (member: Member) => {
 }
 
 const myPop = new Population({
-    populationSize: 10,
-    mutationRate: 0.01,
+    populationSize: 1000,
+    mutationRate: 0.1,
     eliminationRate: 0.4,
     chromosomeDefinition: chromeDef,
-    fitnessFunction: fitnessFunction
+    fitnessFunction: fitnessFunction,
+    optimizationType: OptimizationType.MAX
 });
 
-console.log(myPop.members);
-myPop.evolve();
-console.log(myPop.members);
+for (let i = 0; i < 10; i++) {
+    myPop.evolve();
+}
+
+console.log(myPop.history);
